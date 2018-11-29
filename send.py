@@ -8,14 +8,14 @@ import credentials
 import datetime
 
 # get credentials from the credentials.py file
-fromaddr = credentials.EMAIL_ADDRESS
-toaddr = credentials.TO_ADDRESS
+from_addr = credentials.EMAIL_ADDRESS
+to_addr = credentials.TO_ADDRESS
 
 msg = MIMEMultipart()
 
 # Add the to and from email address and the subject.
-msg['From'] = fromaddr
-msg['To'] = toaddr
+msg['From'] = from_addr
+msg['To'] = to_addr
 msg['Subject'] = f"Log files for {datetime.datetime.today().strftime('%Y-%m-%d')}"
 
 # write body of the email
@@ -38,7 +38,7 @@ msg.attach(part)
 # send email`
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
-server.login(fromaddr, credentials.PASSWORD)
+server.login(from_addr, credentials.PASSWORD)
 text = msg.as_string()
-server.sendmail(fromaddr, toaddr, text)
+server.sendmail(from_addr, to_addr, text)
 server.quit()
